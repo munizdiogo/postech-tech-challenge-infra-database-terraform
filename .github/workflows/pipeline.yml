@@ -34,4 +34,5 @@ jobs:
             - name: Criar tabelas
               run: |
                   sudo apt install mysql-client-core-8.0
-                  mysql -u ${{ secrets.RDS_DATABASE_USER }} -p ${{ secrets.RDS_DATABASE_PASSWORD }} -P 3306 -h dbpostech.cellpkbax23y.us-east-1.rds.amazonaws.com < scripts/criacao_tabelas.sql
+                  mysql -u ${{ secrets.RDS_DATABASE_USER }} -p -P 3306 -h dbpostech.cellpkbax23y.us-east-1.rds.amazonaws.com < scripts/criacao_tabelas.sql
+                  ${{ secrets.RDS_DATABASE_PASSWORD }}
