@@ -4,9 +4,6 @@ on:
     push:
         branches: ["main"]
 
-    repository_dispatch:
-        types: [Pipeline]
-
     workflow_dispatch:
 
 env:
