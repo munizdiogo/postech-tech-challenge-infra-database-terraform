@@ -3,36 +3,47 @@ name: Pipeline
 on:
     push:
         branches: ["main"]
-        
-    repository_dispatch:
-        types: [Pipeline]
-        
+
     workflow_dispatch:
-    
+
+env:
+    AWS_DEFAULT_REGION: us-east-1
+
 jobs:
-    deploy:
+    build:
         runs-on: ubuntu-latest
         steps:
-        
             - name: Checkout
               uses: actions/checkout@v3
 
-            # - name: Configurar aws cli
-            #   run: |
-            #       sudo apt install -y awscli
-            #       aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
-            #       aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-            #       aws configure set default_region_name ${{ secrets.AWS_DEFAULT_REGION_NAME }}
-            #       aws configure set default_output_format JSON
-                  
-            # - name: Inicializar o terraform
-            #   run: cd terraform && terraform init
-
-            # - name: Executar o script terraform
-            #   run: cd terraform && terraform apply -auto-approve
-
-            - name: Criar tabelas
+            - name: Configure AWS CLI
               run: |
-                  sudo apt install mysql-client-core-8.0
-                  mysql -u ${{ secrets.RDS_DATABASE_USER }} -p${{ secrets.RDS_DATABASE_PASSWORD }} -P 3306 -h dbpostech.cellpkbax23y.us-east-1.rds.amazonaws.com < scripts/criacao_tabelas.sql
-                  
+                  sudo apt install -y awscli
+                  aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
+                  aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                  aws configure set default_region_name ${{ secrets.AWS_DEFAULT_REGION_NAME }}
+                  aws configure set default_output_format JSON
+
+            - name: Init Terraform
+              run: cd terraform && terraform init
+
+            - name: Apply Terraform
+              run: cd terraform && terraform apply -auto-approve
+
+    deploy:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+
+            - name: Configure AWS CLI
+              run: |
+                  sudo apt install -y awscli
+                  aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
+                  aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                  aws configure set default_region_name ${{ secrets.AWS_DEFAULT_REGION_NAME }}
+                  aws configure set default_output_format JSON
+
+            - name: Run SQL script
+              run: |
+                  mysql -u ${{ secrets.RDS_DATABASE_USER }} -p${{ secrets.RDS_DATABASE_PASSWORD }} -P 3306 -h dbpostech.cellpkbax23y.${{ env.AWS_DEFAULT_REGION }}.rds.amazonaws.com < scripts/init.sql
