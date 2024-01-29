@@ -24,6 +24,6 @@ resource "aws_db_instance" "banco_de_dados" {
 
 
 resource "aws_db_subnet_group" "dbpostech_subnet" {
-  name = "dbpostech_subnet_v3"
+  name = "dbpostech_subnet"
   subnet_ids = [aws_subnet.private_subnet_a.id, aws_subnet.private_subnet_b.id]
 }
