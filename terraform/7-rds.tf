@@ -13,7 +13,7 @@ resource "aws_db_instance" "banco_de_dados" {
   username = "admin"
   password = "Postech123"
   skip_final_snapshot = true
-  db_subnet_group_name = aws_db_subnet_group.db_subnet.id
+  db_subnet_group_name = aws_db_subnet_group.dbpostech_subnet.id
 
   publicly_accessible = true # Permitir acesso público
   vpc_security_group_ids = [aws_security_group.database_security_group.id]
@@ -23,7 +23,7 @@ resource "aws_db_instance" "banco_de_dados" {
 
 
 
-resource "aws_db_subnet_group" "db_subnet" {
-  name = "dbsubnet"
+resource "aws_db_subnet_group" "dbpostech_subnet" {
+  name = "dbpostech_subnet"
   subnet_ids = [aws_subnet.private_subnet_a.id, aws_subnet.private_subnet_b.id]
 }
