@@ -5,7 +5,7 @@ resource "aws_instance" "webserver" {
 }
 
 
-resource "aws_db_instance" "banco_de_dados" {
+resource "aws_db_instance" "banco_de_dados_produto" {
   allocated_storage = 10
   engine = "mysql"
   engine_version = "5.7"
@@ -13,7 +13,7 @@ resource "aws_db_instance" "banco_de_dados" {
   username = "admin"
   password = "Postech123"
   skip_final_snapshot = true
-  db_subnet_group_name = aws_db_subnet_group.db_subnet.id
+  db_subnet_group_name = aws_db_subnet_group.db_produto_subnet.id
 
   publicly_accessible = true # Permitir acesso público
   vpc_security_group_ids = [aws_security_group.database_security_group.id]
@@ -22,7 +22,7 @@ resource "aws_db_instance" "banco_de_dados" {
 }
 
 
-resource "aws_db_instance" "banco_de_dados" {
+resource "aws_db_instance" "banco_de_dados_pedido" {
   allocated_storage = 10
   engine = "mysql"
   engine_version = "5.7"
@@ -30,7 +30,7 @@ resource "aws_db_instance" "banco_de_dados" {
   username = "admin"
   password = "Postech123"
   skip_final_snapshot = true
-  db_subnet_group_name = aws_db_subnet_group.db_subnet.id
+  db_subnet_group_name = aws_db_subnet_group.db_pedido_subnet.id
 
   publicly_accessible = true # Permitir acesso público
   vpc_security_group_ids = [aws_security_group.database_security_group.id]
@@ -40,7 +40,13 @@ resource "aws_db_instance" "banco_de_dados" {
 
 
 
-resource "aws_db_subnet_group" "db_subnet" {
-  name = "dbsubnet"
+resource "aws_db_subnet_group" "db_pedido_subnet" {
+  name = "db-pedido-subnet"
+  subnet_ids = [aws_subnet.private_subnet_a.id, aws_subnet.private_subnet_b.id]
+}
+
+
+resource "aws_db_subnet_group" "db_produto_subnet" {
+  name = "db-produto-subnet"
   subnet_ids = [aws_subnet.private_subnet_a.id, aws_subnet.private_subnet_b.id]
 }
