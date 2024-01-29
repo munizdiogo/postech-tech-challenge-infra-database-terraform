@@ -24,6 +24,7 @@ CREATE TABLE `pedidos_produtos` (
     `produto_categoria` VARCHAR(60) NOT NULL,
     `produto_preco` DECIMAL(4,2) NOT NULL,
     `produto_nome` VARCHAR(150) NOT NULL,
+    `produto_descricao` VARCHAR(150) NOT NULL,
     UNIQUE (`id`)
 );
 
