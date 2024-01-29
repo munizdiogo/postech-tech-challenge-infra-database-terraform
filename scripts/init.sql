@@ -10,6 +10,7 @@ CREATE TABLE `pedidos` (
     `data_alteracao` DATETIME NOT NULL,
     `status` VARCHAR(20) NOT NULL,
     `cpf` VARCHAR(11) NOT NULL,
+    `pagamento_status` VARCHAR(60) NOT NULL,
     PRIMARY KEY (`id`),
     UNIQUE (`id`)
 );
