@@ -4,7 +4,7 @@ CREATE DATABASE IF NOT EXISTS dbpostech_pedido;
 -- Usar o banco de dados criado
 USE dbpostech_pedido;
 
-CREATE TABLE `pedidos` (
+CREATE TABLE IF NOT EXISTS `pedidos` (
     `id` INTEGER(11) NOT NULL AUTO_INCREMENT,
     `data_criacao` DATETIME NOT NULL,
     `data_alteracao` DATETIME NOT NULL,
@@ -15,7 +15,7 @@ CREATE TABLE `pedidos` (
     UNIQUE (`id`)
 );
 
-CREATE TABLE `pedidos_produtos` (
+CREATE TABLE IF NOT EXISTS `pedidos_produtos` (
     `id` INTEGER(11) NOT NULL AUTO_INCREMENT,
     `data_criacao` DATETIME NOT NULL,
     `data_alteracao` DATETIME NOT NULL,
@@ -39,7 +39,7 @@ CREATE DATABASE IF NOT EXISTS dbpostech_produto;
 USE dbpostech_produto;
 
 
-CREATE TABLE `produtos` (
+CREATE TABLE IF NOT EXISTS `produtos` (
     `id` INTEGER(11) NOT NULL AUTO_INCREMENT,
     `data_criacao` DATETIME NOT NULL,
     `data_alteracao` DATETIME NOT NULL,
