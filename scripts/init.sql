@@ -1,8 +1,32 @@
 -- Criar um banco de dados (caso ainda não exista)
+CREATE DATABASE IF NOT EXISTS dbpostech_clinete;
+
+-- Usar o banco de dados criado
+USE dbpostech_cliente;
+
+
+CREATE TABLE IF NOT EXISTS `clientes` (
+    `id` INTEGER(11) NOT NULL AUTO_INCREMENT,
+    `data_criacao` DATETIME NOT NULL,
+    `data_alteracao` DATETIME NOT NULL,
+    `nome` VARCHAR(150) NOT NULL,
+    `email` VARCHAR(100) NOT NULL,
+    `cpf` VARCHAR(11) NOT NULL,
+    `endereco` VARCHAR(255) NOT NULL,
+    `telefone` VARCHAR(20) NOT NULL,
+    PRIMARY KEY (`id`),
+    UNIQUE (`id`)
+);
+
+
+
+
+-- Criar um banco de dados (caso ainda não exista)
 CREATE DATABASE IF NOT EXISTS dbpostech_pedido;
 
 -- Usar o banco de dados criado
 USE dbpostech_pedido;
+
 
 CREATE TABLE IF NOT EXISTS `pedidos` (
     `id` INTEGER(11) NOT NULL AUTO_INCREMENT,
