@@ -1,5 +1,5 @@
 -- Criar um banco de dados (caso ainda não exista)
-CREATE DATABASE IF NOT EXISTS dbpostech_clientes;
+CREATE DATABASE IF NOT EXISTS dbpostech_cliente;
 
 -- Usar o banco de dados criado
 USE dbpostech_cliente;
